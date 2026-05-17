@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="lib" path="C:/Users/tanan/Desktop/Faculdade/Bibliotecas Java/ListaEncadeadaSimples.jar"/>
+	<classpathentry kind="lib" path="lib/ListaEncadeadaSimples.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
