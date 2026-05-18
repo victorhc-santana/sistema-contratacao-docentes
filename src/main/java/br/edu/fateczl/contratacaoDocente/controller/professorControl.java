@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Professor;
+import br.edu.fateczl.fila.Fila;
 
 public class professorControl implements ActionListener {
 	
@@ -67,13 +68,17 @@ public class professorControl implements ActionListener {
 			
 	}
 	
+	
+	//Fazer utilizando lista encadeada
 	private void atualizar() { //vai atualizar o professor do arquivo professor.csv PARA TERMINAR
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
 		
 		
 	}
-
+	
+	
+	//Fazer utilizando lista encadeada
 	private void remover() throws IOException { //vai remover o professor do arquivo professor.csv PARA TERMINAR
 		
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
@@ -156,28 +161,66 @@ public class professorControl implements ActionListener {
 		}
 		
 	}
-
+	
+	
+	//A parte de busca deve ser feito por meio de uma estrutura Fila
+	//Vai ler o arquivo e colocar cada objeto do tipo professor em uma Fila
+	//Ler cada posição da Fila até achar o CPF correspondente. Caso ache, retorna o objeto do tipo professor. Caso contrário, retorna "Professor não cadastrado".
+	
 	private Professor buscaProfessor(Professor professor) throws IOException {
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
+		
+		Fila<Professor> fila = new Fila<>(); //Criando uma fila com objeto professor
+		
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream fis = new FileInputStream(arq);
 			InputStreamReader isr = new InputStreamReader(fis);
 			BufferedReader buffer = new BufferedReader(isr);
 			String linha = buffer.readLine();
+			
+			//lendo o arquivo para popular a fila;
 			while(linha != null) {
+				//Divide a String por ; e insere no vetor vetLinha
 				String[] vetLinha = linha.split(";");
-				if(vetLinha[0].equals(professor.cpf)) {
-					professor.nome = vetLinha[1];
-					break;
-				}
+				
+				Professor prof = new Professor();
+				
+				//Popular a Fila com cada objeto lido do arquivo
+				
+				prof.cpf = vetLinha[0];
+				prof.nome = vetLinha[1];
+				prof.area = vetLinha[2];
+				prof.QtdPontos = vetLinha[3];
+				
+				//Insere o objeto prof na Fila criada
+				fila.insert(prof);
 				
 				linha = buffer.readLine();
 				
 			}
+			
 			buffer.close();
 			isr.close();
 			fis.close();
+			
+			int tamanhoFila = fila.size();
+			
+			//Vai percorrer a fila até achar o CPF correspondente e retornar o objeto professor
+			
+			for (int i = 0; i < tamanhoFila; i++) {
+				
+				 Professor prof = new Professor();
+				 
+				 prof = fila.remove();
+				 
+				 if(prof.cpf.equals(professor.cpf)) {
+					 professor = prof;
+				 }
+				 
+				 fila.insert(prof);
+				
+			}
 		}
 		
 		return professor;
