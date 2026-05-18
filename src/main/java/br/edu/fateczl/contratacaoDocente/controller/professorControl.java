@@ -58,7 +58,11 @@ public class professorControl implements ActionListener {
 			atualizar();
 		}
 		if(cmd.equals("Remover")) {
-			remover();
+			try {
+				remover();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 			
 	}
@@ -70,9 +74,32 @@ public class professorControl implements ActionListener {
 		
 	}
 
-	private void remover() { //vai remover o professor do arquivo professor.csv PARA TERMINAR
+	private void remover() throws IOException { //vai remover o professor do arquivo professor.csv PARA TERMINAR
+		
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
+		
+		//Captura o CPF inserido pelo usuário e faz um busca em professor.csv para remover
+		if (arq.exists() && arq.isFile()) {
+			
+			String cpfBusca = tfProfessorCpf.getText();
+			
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+			
+			while(linha!=null) {
+				String[] vetLinha = linha.split(";");
+				if(vetLinha[0].equals(cpfBusca)) {
+					vetLinha[1] = null;
+					break;
+				}
+				
+			}
+			
+			
+		}
 		
 	}
 
