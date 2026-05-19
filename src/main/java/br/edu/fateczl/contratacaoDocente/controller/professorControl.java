@@ -58,7 +58,11 @@ public class professorControl implements ActionListener {
 			}
 		}
 		if (cmd.equals("Atualizar")) {
-			atualizar();
+			try {
+				atualizar();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
@@ -70,16 +74,136 @@ public class professorControl implements ActionListener {
 
 	}
 
+	// COMENTARIO PARA CORRECAO ==> NESSE CASO atualizarProf ESTA ESPERANDO UM
+	// OBJETO DO TIPO PROFESSOR, MAS ESTOU PASSANDO UMA STRING
+	private void atualizar() throws IOException {
+
+		Professor professor = new Professor();
+		professor.cpf = tfProfessorCpf.getText();
+		professor.nome = tfProfessorNome.getText();
+		professor.area = tfProfessorArea.getText();
+		professor.QtdPontos = tfProfessorPontos.getText();
+
+		atualizarProf(professor);
+		tfProfessorCpf.setText("");
+		tfProfessorNome.setText("");
+
+	}
+
 	// Fazer utilizando lista encadeada
-	private void atualizar() { // vai atualizar o professor do arquivo professor.csv PARA TERMINAR
+	private void atualizarProf(Professor professor) throws IOException {
+
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
+
+		Lista<professor> lista = new Lista<>();
+
+		// Faz a leitura do arquivo professor.csv
+
+		if (arq.exists() && arq.isFile()) {
+
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			while (linha != null) {
+
+				String[] vetLinha = linha.split(";");
+
+				Professor prof = new Professor();
+
+				// vai popular o objeto prof com as características
+
+				prof.cpf = vetLinha[0];
+				prof.nome = vetLinha[1];
+				prof.area = vetLinha[2];
+				prof.QtdPontos = vetLinha[3];
+
+				lista.add(prof);
+
+				// Incremento do While! Importante!
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+
+		}
+
+		// Parâmetro de busca para atualizar o Professor seria o CPF.. Logo busca na
+		// lista pelo CPF do Prof
+
+		for (int i = 0; i < lista.size(); i++) {
+
+			// pega o professor do indice i e salva em um objeto
+
+			Professor prof = new Professor();
+			prof = lista.get(i);
+
+			// Faz a valição para ver se os dois CPF são iguais
+			if (prof.cpf.equals(professor.cpf)) {
+
+				prof.nome = professor.nome;
+				prof.area = professor.area;
+				prof.QtdPontos = professor.QtdPontos;
+
+				// O CPF não sofre atualização. Caso for necessária atualização, implementar no
+				// código
+				// Preciso remover o professor com os dados antigos da lista
+				lista.remove(i);
+				// Inserindo o professor atualizado na posição da lista
+				lista.add(prof, i);
+
+				// Força o fim do laço
+				break;
+			}
+		}
+
+		// Reescrever o que foi atualizado no arquivo Professor.csv
+
+		boolean existe = false;
+		if (arq.exists()) {
+			existe = true;
+		}
+		FileWriter fw = new FileWriter(arq, existe);
+		PrintWriter pw = new PrintWriter(fw);
+
+		for (int i = 0; i < lista.size(); i++) {
+
+			Professor prof = new Professor();
+
+			prof = lista.get(i);
+
+			// Chama a função toString para reescrever o professor no arquivo
+			pw.println(prof.toString());
+
+		}
+
+		pw.flush();
+		pw.close();
+		fw.close();
+
+	}
+
+	private void remover() throws IOException {
+
+		Professor professor = new Professor();
+		professor.cpf = tfProfessorCpf.getText();
+		professor.nome = tfProfessorNome.getText();
+		professor.area = tfProfessorArea.getText();
+		professor.QtdPontos = tfProfessorPontos.getText();
+
+		removerProf(professor);
+		tfProfessorCpf.setText("");
+		tfProfessorNome.setText("");
 
 	}
 
 	// O método vai receber o CPF do professor
-	private void remover(Professor professor) throws IOException { // vai remover o professor do arquivo professor.csv
-																	// PARA TERMINAR
+	private void removerProf(Professor professor) throws IOException {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
@@ -157,15 +281,14 @@ public class professorControl implements ActionListener {
 		for (int i = 0; i < lista.size(); i++) {
 
 			Professor prof = new Professor();
-			
+
 			prof = lista.get(i);
-			
-			//Chama a função toString para reescrever o professor no arquivo
+
+			// Chama a função toString para reescrever o professor no arquivo
 			pw.println(prof.toString());
-			
 
 		}
-		
+
 		pw.flush();
 		pw.close();
 		fw.close();
