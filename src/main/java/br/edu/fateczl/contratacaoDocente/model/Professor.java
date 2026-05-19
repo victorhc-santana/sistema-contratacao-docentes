@@ -6,12 +6,11 @@ public class Professor {
 	public String nome;
 	public String area;
 	public String QtdPontos;
-	
+
 	public String toString() {
-		 
-		return cpf+";"+nome+";"+area+";"+QtdPontos;
-		
+
+		return cpf + ";" + nome + ";" + area + ";" + QtdPontos;
+
 	}
-	
-	
+
 }
