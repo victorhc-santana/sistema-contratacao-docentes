@@ -8,6 +8,7 @@ public class Disciplina {
 	public String horaInicial;
 	public String horasDiarias;
 	public String codCurso;
+	
 
 	public String toString() {
 

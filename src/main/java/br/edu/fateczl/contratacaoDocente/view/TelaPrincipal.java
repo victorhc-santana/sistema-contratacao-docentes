@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import br.edu.fateczl.contratacaoDocente.controller.cursoController;
+//import br.edu.fateczl.contratacaoDocente.controller.disciplinaController;
+import br.edu.fateczl.contratacaoDocente.controller.professorControl;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -68,6 +73,9 @@ public class TelaPrincipal extends JFrame {
 		tabbedPane.setBounds(0, 0, 626, 443);
 		contentPane.add(tabbedPane);
 		
+		/*
+		 * iniico da tad disciplina
+		 * */
 		JPanel tabDisciplina = new JPanel();
 		tabbedPane.addTab("Disciplinas", null, tabDisciplina, "Cadastro de disciplinas");
 		tabDisciplina.setLayout(null);
@@ -169,6 +177,12 @@ public class TelaPrincipal extends JFrame {
 		btnListar.setBounds(246, 178, 97, 22);
 		tabDisciplina.add(btnListar);
 		
+		//funções ao aos botoes
+		
+		
+		/*
+		 * inicio tab cursos 
+		 * */
 		JPanel tabCursos = new JPanel();
 		tabbedPane.addTab("Cursos", null, tabCursos, "Cursos disponibilizados");
 		tabCursos.setLayout(null);
@@ -232,6 +246,18 @@ public class TelaPrincipal extends JFrame {
 		btnLimpar_1.setBounds(386, 178, 96, 22);
 		tabCursos.add(btnLimpar_1);
 		
+		cursoController cursoCont = new cursoController(txtCodigoCurso, txtNomeCurso, txtAreaConhecimento, textArea_1);
+		//há dois botões não implementados no curso controller, listar e limpar
+		btnNewButton_1.addActionListener(cursoCont);
+		btnAtualizar_1.addActionListener(cursoCont);
+		btnConsultar_1.addActionListener(cursoCont);
+		btnRemover_1.addActionListener(cursoCont);
+		btnListar_1.addActionListener(cursoCont);
+		btnLimpar_1.addActionListener(cursoCont);
+		
+		/*
+		 * inicio tab professores
+		 */
 		JPanel tabProfessores = new JPanel();
 		tabbedPane.addTab("Professores", null, tabProfessores, "Professores cadastrados");
 		tabProfessores.setLayout(null);
@@ -305,6 +331,20 @@ public class TelaPrincipal extends JFrame {
 		btnLimpar_1_1.setBounds(391, 164, 96, 22);
 		tabProfessores.add(btnLimpar_1_1);
 		
+		//da função aos botoes
+		professorControl professorCont = new professorControl(tfProfessorCpf, tfProfessorNome, tfProfessorArea, tfProfessorPontos, textArea_1_1);
+		//há dois botoes sem função no professorControl, listar e limpar
+		btnNewButton_1_1.addActionListener(professorCont);
+		btnAtualizar_1_1.addActionListener(professorCont);
+		btnConsultar_1_1.addActionListener(professorCont);
+		btnRemover_1_1.addActionListener(professorCont);
+		btnListar_1_1.addActionListener(professorCont);
+		btnLimpar_1_1.addActionListener(professorCont);
+		
+		
+		/*
+		 * inicio tab inscrições
+		 * */
 		JPanel tabInscrições = new JPanel();
 		tabbedPane.addTab("Inscrições", null, tabInscrições, "Professores inscritos");
 		tabInscrições.setLayout(null);
@@ -368,6 +408,9 @@ public class TelaPrincipal extends JFrame {
 		btnLimpar_1_1_1.setBounds(398, 167, 96, 22);
 		tabInscrições.add(btnLimpar_1_1_1);
 		
+		/*
+		 * inicio tab consulta
+		 * */
 		JPanel tabConsultaInscrito = new JPanel();
 		tabbedPane.addTab("Inscritos", null, tabConsultaInscrito, "Consultar inscritos");
 		tabConsultaInscrito.setLayout(null);

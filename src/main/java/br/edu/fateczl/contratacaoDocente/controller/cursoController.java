@@ -1,6 +1,7 @@
 package br.edu.fateczl.contratacaoDocente.controller;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ import br.edu.fateczl.contratacaoDocente.model.Curso;
 import br.edu.fateczl.fila.Fila;
 import model.Lista;
 
-public class cursoController {
+public class cursoController implements ActionListener {
 
 	private JTextField tfcodigoCurso;
 	private JTextField tfnomeCurso;
@@ -31,7 +32,7 @@ public class cursoController {
 		this.tfareaCurso = tfareaCurso;
 		this.taCurso = taCurso;
 	}
-
+	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		String cmd = e.getActionCommand();
