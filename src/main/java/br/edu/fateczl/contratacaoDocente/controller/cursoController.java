@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Curso;
-import br.edu.fateczl.contratacaoDocente.model.Professor;
+//import br.edu.fateczl.contratacaoDocente.model.Professor;
 import br.edu.fateczl.fila.Fila;
 import model.Lista;
 
@@ -32,7 +32,6 @@ public class cursoController {
 		this.taCurso = taCurso;
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		String cmd = e.getActionCommand();
@@ -56,12 +55,18 @@ public class cursoController {
 				atualizar();
 			} catch (IOException e1) {
 				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -180,7 +185,7 @@ public class cursoController {
 		return curso;
 	}
 
-	private void atualizar() throws IOException {
+	private void atualizar() throws Exception {
 		Curso curso = new Curso();
 		curso.codCurso = tfcodigoCurso.getText();
 		curso.nomeCurso = tfnomeCurso.getText();
@@ -193,12 +198,12 @@ public class cursoController {
 
 	}
 
-	private void atualizaCurso(Curso curso) throws IOException {
+	private void atualizaCurso(Curso curso) throws Exception {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "cursos.csv");
 
-		Lista<curso> lista = new Lista<>();
+		Lista<Curso> lista = new Lista<>();
 
 		// Faz a leitura do arquivo cursos.csv
 
@@ -221,7 +226,7 @@ public class cursoController {
 				cursoAtualiza.nomeCurso = vetLinha[1];
 				cursoAtualiza.areaCurso = vetLinha[2];
 
-				lista.add(cursoAtualiza);
+				lista.addLast(cursoAtualiza);
 
 				// Incremento do While! Importante!
 				linha = buffer.readLine();
@@ -291,7 +296,7 @@ public class cursoController {
 
 	// VERIFICAR se é para excluir o curso pelo Código somente e adaptar essa parte
 	// do código eliminando partes não necessárias
-	private void remover() throws IOException {
+	private void remover() throws Exception {
 
 		Curso curso = new Curso();
 		curso.codCurso = tfcodigoCurso.getText();
@@ -304,12 +309,12 @@ public class cursoController {
 		tfareaCurso.setText("");
 	}
 
-	private void removeCurso(Curso curso) throws IOException {
+	private void removeCurso(Curso curso) throws Exception {
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "cursos.csv");
 
 		// Adicionar o arquivo correto na lib para Listas
-		Lista<curso> lista = new Lista<>();
+		Lista<Curso> lista = new Lista<>();
 
 		// Captura o Codigo inserido pelo usuário e faz um busca em curso.csv para
 		// remover
@@ -333,7 +338,7 @@ public class cursoController {
 				cursoRemove.areaCurso = vetLinha[2];
 
 				// Insere o objeto curso na Lista criada
-				lista.add(cursoRemove);
+				lista.addLast(cursoRemove);
 
 				linha = buffer.readLine();
 
