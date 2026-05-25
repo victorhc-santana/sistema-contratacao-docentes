@@ -1,6 +1,7 @@
 package br.edu.fateczl.contratacaoDocente.controller;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
@@ -62,12 +63,18 @@ public class professorControl implements ActionListener {
 				atualizar();
 			} catch (IOException e1) {
 				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -76,7 +83,7 @@ public class professorControl implements ActionListener {
 
 	// COMENTARIO PARA CORRECAO ==> NESSE CASO atualizarProf ESTA ESPERANDO UM
 	// OBJETO DO TIPO PROFESSOR, MAS ESTOU PASSANDO UMA STRING
-	private void atualizar() throws IOException {
+	private void atualizar() throws Exception {
 
 		Professor professor = new Professor();
 		professor.cpf = tfProfessorCpf.getText();
@@ -91,12 +98,12 @@ public class professorControl implements ActionListener {
 	}
 
 	// Fazer utilizando lista encadeada
-	private void atualizarProf(Professor professor) throws IOException {
+	private void atualizarProf(Professor professor) throws Exception {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
 
-		Lista<professor> lista = new Lista<>();
+		Lista<Professor> lista = new Lista<>();
 
 		// Faz a leitura do arquivo professor.csv
 
@@ -120,7 +127,7 @@ public class professorControl implements ActionListener {
 				prof.area = vetLinha[2];
 				prof.QtdPontos = vetLinha[3];
 
-				lista.add(prof);
+				lista.addLast(prof);
 
 				// Incremento do While! Importante!
 				linha = buffer.readLine();
@@ -188,7 +195,7 @@ public class professorControl implements ActionListener {
 
 	}
 
-	private void remover() throws IOException {
+	private void remover() throws Exception {
 
 		Professor professor = new Professor();
 		professor.cpf = tfProfessorCpf.getText();
@@ -203,13 +210,13 @@ public class professorControl implements ActionListener {
 	}
 
 	// O método vai receber o CPF do professor
-	private void removerProf(Professor professor) throws IOException {
+	private void removerProf(Professor professor) throws Exception {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "professor.csv");
 
 		// Adicionar o arquivo correto na lib para Listas
-		Lista<professor> lista = new Lista<>();
+		Lista<Professor> lista = new Lista<>();
 
 		// Captura o CPF inserido pelo usuário e faz um busca em professor.csv para
 		// remover
@@ -234,7 +241,7 @@ public class professorControl implements ActionListener {
 				prof.QtdPontos = vetLinha[3];
 
 				// Insere o objeto prof na Lista criada
-				lista.add(prof);
+				lista.addLast(prof);
 
 				linha = buffer.readLine();
 
