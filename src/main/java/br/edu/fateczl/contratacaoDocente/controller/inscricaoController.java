@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
+import br.edu.fateczl.contratacaoDocente.model.Professor;
 import br.edu.fateczl.fila.Fila;
 import model.Lista;
 
@@ -62,7 +63,6 @@ public class inscricaoController implements ActionListener {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -72,7 +72,6 @@ public class inscricaoController implements ActionListener {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -86,10 +85,70 @@ public class inscricaoController implements ActionListener {
 		inscricao.codProcesso = tfcodigoProcesso.getText();
 		inscricao.cpfProfessor = tfcpfInscricao.getText();
 
-		cadastraInscricao(inscricao.toString());
-		tfcodigoDisciplina.setText("");
-		tfcodigoProcesso.setText("");
-		tfcpfInscricao.setText("");
+		// Só pode se inscrever se o professor estiver presente no professor.csv
+		// Preciso verificar se o professor está presente no arquivo professor.csv antes
+		// de iniciar o cadastro
+		// tenho que ler o arquivo para ver se o professor está la
+
+		// Leitura do arquivo
+
+		if (lerCsvProfessor(inscricao.cpfProfessor)) {
+
+			cadastraInscricao(inscricao.toString());
+			tfcodigoDisciplina.setText("");
+			tfcodigoProcesso.setText("");
+			tfcpfInscricao.setText("");
+
+		} else {
+			
+			tainscricao.setText("Professor não está cadastrado. Cadastre o professor antes de iniciar uma inscrição.");
+		}
+
+	}
+
+	//Método para validar se o CPF do professor está presente no arquivo professor.csv
+	//Só permite a inscrição se o cpf estiver presente
+	private boolean lerCsvProfessor(String cpf) {
+
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "professor.csv");
+
+		try {
+			if (arq.exists() && arq.isFile()) {
+				
+				FileInputStream fis = new FileInputStream(arq);
+				InputStreamReader isr = new InputStreamReader(fis);
+				BufferedReader buffer = new BufferedReader(isr);
+				String linha = buffer.readLine();
+
+				while (linha != null) {
+					
+					String[] vetLinha = linha.split(";");
+
+					Professor prof = new Professor();
+
+					prof.cpf = vetLinha[0];
+					prof.nome = vetLinha[1];
+					prof.area = vetLinha[2];
+					prof.QtdPontos = vetLinha[3];
+
+					if (prof.cpf.equals(cpf)) {
+						return true;
+					}
+					
+					linha = buffer.readLine();
+				}
+
+				buffer.close();
+				isr.close();
+				fis.close();
+			}
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		return false;
 
 	}
 
@@ -125,7 +184,7 @@ public class inscricaoController implements ActionListener {
 		Inscricao inscricao = new Inscricao();
 		inscricao.codProcesso = tfcodigoProcesso.getText();
 
-		inscricao = buscaProfessor(inscricao);
+		inscricao = buscaInscricao(inscricao);
 		if (inscricao.codProcesso != null) {
 			tainscricao.setText("Código Processo " + inscricao.codProcesso + " - CPF Professor: "
 					+ inscricao.cpfProfessor + " - Codigo Disciplina " + inscricao.codDisciplina);
@@ -139,7 +198,7 @@ public class inscricaoController implements ActionListener {
 
 	}
 
-	private Inscricao buscaProfessor(Inscricao inscricao) throws Exception {
+	private Inscricao buscaInscricao(Inscricao inscricao) throws Exception {
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "inscricoes.csv");
 
