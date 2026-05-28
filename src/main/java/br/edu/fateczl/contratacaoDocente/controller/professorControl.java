@@ -94,6 +94,8 @@ public class professorControl implements ActionListener {
 		atualizarProf(professor);
 		tfProfessorCpf.setText("");
 		tfProfessorNome.setText("");
+		tfProfessorArea.setText("");
+		tfProfessorPontos.setText("");
 
 	}
 
@@ -133,6 +135,8 @@ public class professorControl implements ActionListener {
 				linha = buffer.readLine();
 
 			}
+			
+			taProfessor.setText("Cadastro atualizado com sucesso!!!");
 
 			buffer.close();
 			isr.close();
