@@ -171,11 +171,7 @@ public class professorControl implements ActionListener {
 
 		// Reescrever o que foi atualizado no arquivo Professor.csv
 
-		boolean existe = false;
-		if (arq.exists()) {
-			existe = true;
-		}
-		FileWriter fw = new FileWriter(arq, existe);
+		FileWriter fw = new FileWriter(arq, false);
 		PrintWriter pw = new PrintWriter(fw);
 
 		for (int i = 0; i < lista.size(); i++) {
@@ -278,11 +274,7 @@ public class professorControl implements ActionListener {
 		// Necessário reescrever o arquivo com todos os professores que sobraram na
 		// lista com o CPF removido
 
-		boolean existe = false;
-		if (arq.exists()) {
-			existe = true;
-		}
-		FileWriter fw = new FileWriter(arq, existe);
+		FileWriter fw = new FileWriter(arq, false);
 		PrintWriter pw = new PrintWriter(fw);
 
 		for (int i = 0; i < lista.size(); i++) {
@@ -312,6 +304,8 @@ public class professorControl implements ActionListener {
 		cadastraProfessor(professor.toString());
 		tfProfessorCpf.setText("");
 		tfProfessorNome.setText("");
+		tfProfessorArea.setText("");
+		tfProfessorPontos.setText("");
 
 	}
 
@@ -334,6 +328,7 @@ public class professorControl implements ActionListener {
 
 		FileWriter fw = new FileWriter(arq, existe);
 		PrintWriter pw = new PrintWriter(fw);
+		taProfessor.setText("Professor cadastrado com sucesso!!!");
 		pw.write(csvProfessor + "\r\n");
 		pw.flush();
 		pw.close();
@@ -349,10 +344,12 @@ public class professorControl implements ActionListener {
 
 		professor = buscaProfessor(professor);
 		if (professor.nome != null) {
-			taProfessor.setText("CPF: " + professor.cpf + " - Nome: " + professor.nome);
+			taProfessor.setText("CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos);
 		} else {
 			taProfessor.setText("Professor não encontrado");
 		}
+		
+		tfProfessorCpf.setText("");
 
 	}
 
