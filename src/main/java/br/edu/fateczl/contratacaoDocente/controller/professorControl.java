@@ -246,6 +246,8 @@ public class professorControl implements ActionListener {
 				linha = buffer.readLine();
 
 			}
+			
+			taProfessor.setText("Professor removido com sucesso!!!");
 
 			buffer.close();
 			isr.close();
