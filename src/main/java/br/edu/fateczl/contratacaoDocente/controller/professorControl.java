@@ -135,7 +135,7 @@ public class professorControl implements ActionListener {
 				linha = buffer.readLine();
 
 			}
-			
+
 			taProfessor.setText("Cadastro atualizado com sucesso!!!");
 
 			buffer.close();
@@ -246,7 +246,7 @@ public class professorControl implements ActionListener {
 				linha = buffer.readLine();
 
 			}
-			
+
 			taProfessor.setText("Professor removido com sucesso!!!");
 
 			buffer.close();
@@ -350,11 +350,12 @@ public class professorControl implements ActionListener {
 
 		professor = buscaProfessor(professor);
 		if (professor.nome != null) {
-			taProfessor.setText("CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos);
+			taProfessor.setText(
+					"CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos);
 		} else {
 			taProfessor.setText("Professor não encontrado");
 		}
-		
+
 		tfProfessorCpf.setText("");
 
 	}

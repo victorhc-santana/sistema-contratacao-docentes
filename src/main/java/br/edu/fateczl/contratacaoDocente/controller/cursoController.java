@@ -32,6 +32,7 @@ public class cursoController implements ActionListener {
 		this.tfareaCurso = tfareaCurso;
 		this.taCurso = taCurso;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -57,7 +58,6 @@ public class cursoController implements ActionListener {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -67,7 +67,6 @@ public class cursoController implements ActionListener {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -106,6 +105,9 @@ public class cursoController implements ActionListener {
 
 		FileWriter fw = new FileWriter(arq, existe);
 		PrintWriter pw = new PrintWriter(fw);
+
+		taCurso.setText("Curso cadastrado com sucesso!!");
+
 		pw.write(csvCurso + "\r\n");
 		pw.flush();
 		pw.close();
@@ -120,10 +122,13 @@ public class cursoController implements ActionListener {
 
 		curso = buscaCurso(curso);
 		if (curso.nomeCurso != null) {
-			taCurso.setText("CODIGO CURSO: " + curso.codCurso + " - NOME CURSO: " + curso.nomeCurso);
+			taCurso.setText("Codigo curso: " + curso.codCurso + " - Nome curso: " + curso.nomeCurso
+					+ " - Area conhecimento: " + curso.areaCurso);
 		} else {
 			taCurso.setText("Curso não encontrado!");
 		}
+
+		tfcodigoCurso.setText("");
 
 	}
 
@@ -165,7 +170,8 @@ public class cursoController implements ActionListener {
 
 			int tamanhoFila = fila.size();
 
-			// Vai percorrer a fila até achar o codigo do curso correspondente e retornar o objeto
+			// Vai percorrer a fila até achar o codigo do curso correspondente e retornar o
+			// objeto
 			// curso
 
 			for (int i = 0; i < tamanhoFila; i++) {
@@ -268,15 +274,13 @@ public class cursoController implements ActionListener {
 				// Força o fim do laço
 				break;
 			}
+
+			taCurso.setText("Curso atualizado com sucesso!!!");
 		}
 
 		// Reescrever o que foi atualizado no arquivo curso.csv
 
-		boolean existe = false;
-		if (arq.exists()) {
-			existe = true;
-		}
-		FileWriter fw = new FileWriter(arq, existe);
+		FileWriter fw = new FileWriter(arq, false);
 		PrintWriter pw = new PrintWriter(fw);
 
 		for (int i = 0; i < lista.size(); i++) {
@@ -345,6 +349,8 @@ public class cursoController implements ActionListener {
 
 			}
 
+			taCurso.setText("Curso removido com sucesso!!!");
+
 			buffer.close();
 			isr.close();
 			fis.close();
@@ -376,11 +382,7 @@ public class cursoController implements ActionListener {
 		// Necessário reescrever o arquivo com todos os cursos que sobraram na
 		// lista sem o cod removido
 
-		boolean existe = false;
-		if (arq.exists()) {
-			existe = true;
-		}
-		FileWriter fw = new FileWriter(arq, existe);
+		FileWriter fw = new FileWriter(arq, false);
 		PrintWriter pw = new PrintWriter(fw);
 
 		for (int i = 0; i < lista.size(); i++) {
