@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
 import br.edu.fateczl.contratacaoDocente.model.Professor;
-import br.edu.fateczl.fila.Fila;
 import model.Lista;
 
 public class InscritosController implements ActionListener {
@@ -49,7 +48,6 @@ public class InscritosController implements ActionListener {
 		File arq = new File(path, "inscricoes.csv");
 
 		Lista<Inscricao> lista = new Lista<>();
-		Fila<Professor> fila = new Fila<>(); // Fila de professor armazenada
 
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream fis = new FileInputStream(arq);
@@ -81,15 +79,40 @@ public class InscritosController implements ActionListener {
 
 		}
 
-		// ordena(lista);
+		// Popula a fila com os professores presentes no arquivo inscrição
+		Lista<Professor> listaprof = populaProfessor(lista);
+		
+		String[] vetPontos = ordenarPontos(pegarPontos(listaprof));
+
+	}
+
+	private String[] ordenarPontos(String[] vetPontos) {
+
+	}
+
+	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
+	// em um vetor para ordenação
+	private String[] pegarPontos(Lista<Professor> listaprof) throws Exception {
+
+		int tamanho = listaprof.size();
+		String[] vetPontos = new String[tamanho];
+
+		for (int i = 0; i < tamanho; i++) {
+
+			vetPontos[i] = listaprof.get(i).QtdPontos;
+
+		}
+
+		return vetPontos;
+
 	}
 
 	// Método para buscar o professor usando o cpf presente no arquivo
 	// inscricoes.csv
 	// Varrer para pegar os dados dos professores: nome e pontuação
-	private Fila<Professor> populaProfessor(Lista<Inscricao> lista) throws Exception {
+	private Lista<Professor> populaProfessor(Lista<Inscricao> lista) throws Exception {
 
-		Fila<Professor> fila = new Fila<>();
+		Lista<Professor> listaprof = new Lista<>();
 
 		int tamanho = lista.size();
 
@@ -97,14 +120,16 @@ public class InscritosController implements ActionListener {
 
 			Professor professor = buscaProfessor(lista.get(i).cpfProfessor);
 
-			fila.insert(professor); // Inserindo o professor na fila
+			listaprof.add(professor, i); // Inserindo o professor na fila
 
 		}
-		
-		return fila;
+
+		return listaprof;
 
 	}
 
+	// Método que le o arquivo professor.csv e retorna o professor com o cpf
+	// presente em inscrições
 	private Professor buscaProfessor(String cpfProfessor) throws Exception {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
@@ -126,15 +151,15 @@ public class InscritosController implements ActionListener {
 				prof.nome = vetLinha[1];
 				prof.area = vetLinha[2];
 				prof.QtdPontos = vetLinha[3];
-				
-				if(prof.cpf.equals(cpfProfessor)) {
-					
+
+				if (prof.cpf.equals(cpfProfessor)) {
+
 					buffer.close();
 					isr.close();
 					fis.close();
-					
+
 					return prof;
-					
+
 				}
 
 				linha = buffer.readLine();
@@ -146,8 +171,8 @@ public class InscritosController implements ActionListener {
 			fis.close();
 
 		}
-		
-		return null; //Verificar se é para retornar null
-		
+
+		return null; // Verificar se é para retornar null
+
 	}
 }
