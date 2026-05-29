@@ -6,7 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.edu.fateczl.contratacaoDocente.controller.InscritosController;
 import br.edu.fateczl.contratacaoDocente.controller.cursoController;
+import br.edu.fateczl.contratacaoDocente.controller.disciplinaController;
+import br.edu.fateczl.contratacaoDocente.controller.inscricaoController;
 //import br.edu.fateczl.contratacaoDocente.controller.disciplinaController;
 import br.edu.fateczl.contratacaoDocente.controller.professorControl;
 
@@ -177,7 +180,14 @@ public class TelaPrincipal extends JFrame {
 		btnListar.setBounds(246, 178, 97, 22);
 		tabDisciplina.add(btnListar);
 		
-		//funções ao aos botoes
+		disciplinaController disciplinaControl = new disciplinaController(txtCodigoDisciplina, txtNomeDisciplina,
+				txtDiadaSemana, txtHorarioInicial, txtHorasDiarias, txtCodigoCursoDisciplina, textArea);
+		btnNewButton.addActionListener(disciplinaControl);
+		btnAtualizar.addActionListener(disciplinaControl);
+		btnRemover.addActionListener(disciplinaControl);
+		btnConsultar.addActionListener(disciplinaControl);
+		btnLimpar.addActionListener(disciplinaControl);
+		btnListar.addActionListener(disciplinaControl);
 		
 		
 		/*
@@ -408,6 +418,15 @@ public class TelaPrincipal extends JFrame {
 		btnLimpar_1_1_1.setBounds(398, 167, 96, 22);
 		tabInscrições.add(btnLimpar_1_1_1);
 		
+		inscricaoController inscricaoControl = new inscricaoController(txtCpfInscricao,
+				txtCodigoDisciplinaInscricao, txtCodigoProcesso, textArea_1_1_1);
+		btnNewButton_1_1_1.addActionListener(inscricaoControl);
+		btnAtualizar_1_1_1.addActionListener(inscricaoControl);
+		btnRemover_1_1_1.addActionListener(inscricaoControl);
+		btnConsultar_1_1_1.addActionListener(inscricaoControl);
+		btnListar_1_1_1.addActionListener(inscricaoControl);
+		btnLimpar_1_1_1.addActionListener(inscricaoControl);
+		
 		/*
 		 * inicio tab consulta
 		 * */
@@ -460,6 +479,11 @@ public class TelaPrincipal extends JFrame {
 		JButton btnLimpar_1_1_1_1 = new JButton("Limpar");
 		btnLimpar_1_1_1_1.setBounds(327, 64, 109, 36);
 		tabDiscipAbertas.add(btnLimpar_1_1_1_1);
+		
+		InscritosController inscritosControl = new InscritosController(txtCodigoDisciplinaConsulta, textArea_1_1_1_1_1);
+		btnConsultar_1_1_1_1_1.addActionListener(inscritosControl);
+		btnConsultar_1_1_1_1.addActionListener(inscritosControl);
+		btnLimpar_1_1_1_1.addActionListener(inscritosControl);
 
 	}
 }

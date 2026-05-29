@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
@@ -17,6 +18,14 @@ public class InscritosController implements ActionListener {
 	
 	//Ver somente se clicando no botao vai mostrar todas as inscrições ou procurar por algum atributo
 	private JTextField tfCodigoDisciplinaConsulta;
+	private JTextArea taConsulta;
+	
+	
+
+	public InscritosController(JTextField tfCodigoDisciplinaConsulta,JTextArea taConsulta) {
+		super();
+		this.tfCodigoDisciplinaConsulta = tfCodigoDisciplinaConsulta;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

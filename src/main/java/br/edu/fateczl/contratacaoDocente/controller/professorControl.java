@@ -48,34 +48,36 @@ public class professorControl implements ActionListener {
 			try {
 				cadastro();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taProfessor.setText("Erro no arquivo: " + e1.getMessage());
+			} catch (Exception e1) {
+				taProfessor.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Consultar")) {
 			try {
 				busca();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taProfessor.setText("Erro no arquivo: " + e1.getMessage());
+			} catch (Exception e1) {
+				taProfessor.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Atualizar")) {
 			try {
 				atualizar();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taProfessor.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				taProfessor.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taProfessor.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				taProfessor.setText("Erro: " + e1.getMessage());
 			}
 		}
 
@@ -90,6 +92,8 @@ public class professorControl implements ActionListener {
 		professor.nome = tfProfessorNome.getText();
 		professor.area = tfProfessorArea.getText();
 		professor.QtdPontos = tfProfessorPontos.getText();
+		
+		validaProfessor(professor);
 
 		atualizarProf(professor);
 		tfProfessorCpf.setText("");
@@ -202,6 +206,8 @@ public class professorControl implements ActionListener {
 		professor.nome = tfProfessorNome.getText();
 		professor.area = tfProfessorArea.getText();
 		professor.QtdPontos = tfProfessorPontos.getText();
+		
+		validaProfessor(professor);
 
 		removerProf(professor);
 		tfProfessorCpf.setText("");
@@ -300,12 +306,14 @@ public class professorControl implements ActionListener {
 
 	}
 
-	private void cadastro() throws IOException {
+	private void cadastro() throws Exception {
 		Professor professor = new Professor();
 		professor.cpf = tfProfessorCpf.getText();
 		professor.nome = tfProfessorNome.getText();
 		professor.area = tfProfessorArea.getText();
 		professor.QtdPontos = tfProfessorPontos.getText();
+		
+		validaProfessor(professor);
 
 		cadastraProfessor(professor.toString());
 		tfProfessorCpf.setText("");
@@ -344,8 +352,10 @@ public class professorControl implements ActionListener {
 
 	// buscar o professor por CPF e mostre no Text Area o resultado da busca
 
-	private void busca() throws IOException {
+	private void busca() throws Exception {
 		Professor professor = new Professor();
+		
+		validaProfessor(professor);
 		professor.cpf = tfProfessorCpf.getText();
 
 		professor = buscaProfessor(professor);
@@ -424,5 +434,24 @@ public class professorControl implements ActionListener {
 
 		return professor;
 	}
-
+	
+	private void validaProfessor(Professor professor) throws Exception{
+		if (professor.cpf == null) {
+			throw new Exception("CPF esta vazio");
+		}
+		if (professor.cpf.length() != 11) {
+			throw new Exception("CPF deve ter 11 digitos");
+		}
+		if(professor.cpf.matches("\\d+")) {
+			throw new Exception("CPF deve conter apenas numeros");
+		}
+		if(professor.QtdPontos == null) {
+			throw new Exception(" A quantia de pontos do professor deve ser registrado");
+		}
+		try {
+	        Integer.parseInt(professor.QtdPontos);
+	    } catch (NumberFormatException e) {
+	        throw new Exception("Pontuação deve ser um número válido.");
+	    }
+	}
 }
