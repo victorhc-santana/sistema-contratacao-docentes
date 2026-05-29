@@ -87,24 +87,67 @@ public class InscritosController implements ActionListener {
 	// Método para buscar o professor usando o cpf presente no arquivo
 	// inscricoes.csv
 	// Varrer para pegar os dados dos professores: nome e pontuação
-	private Fila<Professor> populaProfessor(Lista<Inscricao> lista) {
+	private Fila<Professor> populaProfessor(Lista<Inscricao> lista) throws Exception {
 
 		Fila<Professor> fila = new Fila<>();
-		
+
 		int tamanho = lista.size();
 
 		for (int i = 0; i < tamanho; i++) {
-			
+
 			Professor professor = buscaProfessor(lista.get(i).cpfProfessor);
-			
-			fila.insert(professor); //Inserindo o professor na fila
-			
+
+			fila.insert(professor); // Inserindo o professor na fila
+
 		}
+		
+		return fila;
 
 	}
 
-	private Professor buscaProfessor(String cpfProfessor) {
+	private Professor buscaProfessor(String cpfProfessor) throws Exception {
+
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "professor.csv");
+
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			while (linha != null) {
+				// Divide a String por ; e insere no vetor vetLinha
+				String[] vetLinha = linha.split(";");
+
+				Professor prof = new Professor();
+
+				prof.cpf = vetLinha[0];
+				prof.nome = vetLinha[1];
+				prof.area = vetLinha[2];
+				prof.QtdPontos = vetLinha[3];
+				
+				if(prof.cpf.equals(cpfProfessor)) {
+					
+					buffer.close();
+					isr.close();
+					fis.close();
+					
+					return prof;
+					
+				}
+
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+
+		}
+		
+		return null; //Verificar se é para retornar null
 		
 	}
-
 }
