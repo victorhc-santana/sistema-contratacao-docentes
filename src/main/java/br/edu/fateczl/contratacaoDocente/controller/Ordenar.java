@@ -35,10 +35,10 @@ public class Ordenar {
 
 		while (ponteiroEsquerda <= ponteiroDireita) {
 
-			while (ponteiroEsquerda <= ponteiroDireita && lista.get(ponteiroEsquerda).pontuacao <= pivo.pontuacao) {
+			while (ponteiroEsquerda <= ponteiroDireita && lista.get(ponteiroEsquerda).QtdPontos <= pivo.QtdPontos) { // 
 				ponteiroEsquerda++;
 			}
-			while (ponteiroDireita >= ponteiroEsquerda && lista.get(ponteiroDireita).pontuacao > pivo.pontuacao) {
+			while (ponteiroDireita >= ponteiroEsquerda && lista.get(ponteiroDireita).QtdPontos > pivo.QtdPontos) {
 				ponteiroDireita--;
 			}
 			if (ponteiroEsquerda < ponteiroDireita) {
