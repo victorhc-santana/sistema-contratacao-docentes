@@ -442,7 +442,7 @@ public class professorControl implements ActionListener {
 		if (professor.cpf.length() != 11) {
 			throw new Exception("CPF deve ter 11 digitos");
 		}
-		if(professor.cpf.matches("\\d+")) {
+		if(!professor.cpf.matches("\\d+")) {
 			throw new Exception("CPF deve conter apenas numeros");
 		}
 		if(professor.QtdPontos == null) {
