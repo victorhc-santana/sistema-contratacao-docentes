@@ -77,7 +77,7 @@ public class TelaPrincipal extends JFrame {
 		contentPane.add(tabbedPane);
 		
 		/*
-		 * iniico da tad disciplina
+		 * inicio da tad disciplina
 		 * */
 		JPanel tabDisciplina = new JPanel();
 		tabbedPane.addTab("Disciplinas", null, tabDisciplina, "Cadastro de disciplinas");
@@ -160,10 +160,6 @@ public class TelaPrincipal extends JFrame {
 		tabDisciplina.add(btnRemover);
 		
 		JButton btnConsultar = new JButton("Consultar");
-		btnConsultar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar.setBounds(392, 133, 96, 22);
 		tabDisciplina.add(btnConsultar);
@@ -480,10 +476,8 @@ public class TelaPrincipal extends JFrame {
 		btnLimpar_1_1_1_1.setBounds(327, 64, 109, 36);
 		tabDiscipAbertas.add(btnLimpar_1_1_1_1);
 		
-		InscritosController inscritosControl = new InscritosController(txtCodigoDisciplinaConsulta, textArea_1_1_1_1_1);
-		btnConsultar_1_1_1_1_1.addActionListener(inscritosControl);
+		InscritosController inscritosControl = new InscritosController(txtCodigoDisciplinaConsulta, textArea_1_1_1_1);
 		btnConsultar_1_1_1_1.addActionListener(inscritosControl);
-		btnLimpar_1_1_1_1.addActionListener(inscritosControl);
 
 	}
 }
