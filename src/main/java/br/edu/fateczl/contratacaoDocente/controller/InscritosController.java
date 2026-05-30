@@ -76,9 +76,9 @@ public class InscritosController implements ActionListener {
 
 				// Popular a Lista com cada objeto lido do arquivo
 
-				inscri.codDisciplina = vetLinha[0];
-				inscri.codProcesso = vetLinha[1];
-				inscri.cpfProfessor = vetLinha[2];
+				inscri.cpfProfessor = vetLinha[0];
+				inscri.codDisciplina = vetLinha[1];
+				inscri.codProcesso = vetLinha[2];
 
 				lista.addLast(inscri);
 
