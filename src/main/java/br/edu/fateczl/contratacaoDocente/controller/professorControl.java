@@ -355,13 +355,13 @@ public class professorControl implements ActionListener {
 	private void busca() throws Exception {
 		Professor professor = new Professor();
 		
-		validaProfessor(professor);
 		professor.cpf = tfProfessorCpf.getText();
 
 		professor = buscaProfessor(professor);
+		validaProfessor(professor);
 		if (professor.nome != null) {
 			taProfessor.setText(
-					"CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos);
+					"CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos + "- Area: " + professor.area);
 		} else {
 			taProfessor.setText("Professor não encontrado");
 		}
@@ -442,6 +442,7 @@ public class professorControl implements ActionListener {
 		if (professor.cpf.length() != 11) {
 			throw new Exception("CPF deve ter 11 digitos");
 		}
+		
 		if(!professor.cpf.matches("\\d+")) {
 			throw new Exception("CPF deve conter apenas numeros");
 		}
