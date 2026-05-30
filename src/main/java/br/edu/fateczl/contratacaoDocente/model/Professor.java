@@ -5,7 +5,7 @@ public class Professor {
 	public String cpf;
 	public String nome;
 	public String area;
-	public String QtdPontos;
+	public String QtdPontos; 
 
 	public String toString() {
 

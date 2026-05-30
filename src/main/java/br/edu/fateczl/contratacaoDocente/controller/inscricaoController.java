@@ -133,6 +133,11 @@ public class inscricaoController implements ActionListener {
 					prof.QtdPontos = vetLinha[3];
 
 					if (prof.cpf.equals(cpf)) {
+						
+						buffer.close();
+						isr.close();
+						fis.close();
+						
 						return true;
 					}
 					

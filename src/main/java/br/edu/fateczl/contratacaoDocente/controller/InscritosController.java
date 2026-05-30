@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
 import br.edu.fateczl.contratacaoDocente.model.Professor;
+import controller.QuickSort;
 import model.Lista;
 
 public class InscritosController implements ActionListener {
@@ -80,26 +81,50 @@ public class InscritosController implements ActionListener {
 		}
 
 		// Popula a fila com os professores presentes no arquivo inscrição
+		// Talvez criar uma outra classe chamada inscritos
 		Lista<Professor> listaprof = populaProfessor(lista);
-		
-		String[] vetPontos = ordenarPontos(pegarPontos(listaprof));
+
+		int[] vetPontos = pegarPontos(listaprof);
+
+		vetPontos = ordenarPontos(vetPontos);
+
+		imprimeVetor(vetPontos);
 
 	}
 
-	private String[] ordenarPontos(String[] vetPontos) {
+	// Imprimir o vetor de pontos no text area para ver se está funcionando
+	private void imprimeVetor(int[] vetPontos) {
+
+		for (int i = 0; i < vetPontos.length; i++) {
+
+			taConsulta.setText(Integer.toString(vetPontos[i]));
+
+		}
+	}
+
+	// Falta implementar o método!! Coloquei uma biblioteca para teste
+	// Ordena o vetPontos
+	private int[] ordenarPontos(int[] vetPontos) {
+
+		QuickSort q1 = new QuickSort();
+
+		vetPontos = q1.quickSort(vetPontos, 0, vetPontos.length - 1);
+
+		return vetPontos;
 
 	}
 
 	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
-	// em um vetor para ordenação
-	private String[] pegarPontos(Lista<Professor> listaprof) throws Exception {
+	// em um vetor para ordenação convertendo a String pontuação para inteiro
+
+	private int[] pegarPontos(Lista<Professor> listaprof) throws Exception {
 
 		int tamanho = listaprof.size();
-		String[] vetPontos = new String[tamanho];
+		int[] vetPontos = new int[tamanho];
 
 		for (int i = 0; i < tamanho; i++) {
 
-			vetPontos[i] = listaprof.get(i).QtdPontos;
+			vetPontos[i] = Integer.parseInt(listaprof.get(i).QtdPontos);
 
 		}
 
