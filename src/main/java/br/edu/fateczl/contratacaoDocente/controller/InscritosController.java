@@ -25,6 +25,7 @@ public class InscritosController implements ActionListener {
 	public InscritosController(JTextField tfCodigoDisciplinaConsulta, JTextArea taConsulta) {
 		super();
 		this.tfCodigoDisciplinaConsulta = tfCodigoDisciplinaConsulta;
+		this.taConsulta = taConsulta;
 	}
 
 	@Override
@@ -34,16 +35,27 @@ public class InscritosController implements ActionListener {
 
 		if (cmd.equals("Consultar")) {
 			try {
-				consultar();
+				busca();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
 	}
+	
+	
+	private void busca() throws Exception {
+		
+		Inscricao inscricao = new Inscricao();
+		
+		inscricao.codDisciplina = tfCodigoDisciplinaConsulta.getText();
+
+		consultarProf(inscricao);
+		
+	}
 
 	// Criando uma lista com os dados vindos diretamente do arquivo inscricoes.csv.
 	// Contendo codDisciplina, codProcesso, cpfProfessor
-	private void consultar() throws Exception {
+	private void consultarProf(Inscricao inscricao) throws Exception {
 
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
 		File arq = new File(path, "inscricoes.csv");
