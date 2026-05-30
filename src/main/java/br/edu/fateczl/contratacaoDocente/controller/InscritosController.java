@@ -106,12 +106,18 @@ public class InscritosController implements ActionListener {
 
 	// Imprimir o vetor de pontos no text area para ver se está funcionando
 	private void imprimeVetor(int[] vetPontos) {
+		
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < vetPontos.length; i++) {
 
-			taConsulta.setText(Integer.toString(vetPontos[i]));
+			sb.append(vetPontos[i]).append("\n");
+			//taConsulta.setText(Integer.toString(vetPontos[i]));
 
 		}
+		
+		taConsulta.setText(sb.toString());
+		
 	}
 
 	// Falta implementar o método!! Coloquei uma biblioteca para teste
