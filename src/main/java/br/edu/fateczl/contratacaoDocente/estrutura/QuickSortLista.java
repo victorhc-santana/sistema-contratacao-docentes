@@ -36,12 +36,14 @@ public class QuickSortLista {
 	    while (ponteiroEsquerda <= ponteiroDireita) {
 
 	        while (ponteiroEsquerda <= ponteiroDireita
+	        		&& ponteiroEsquerda < lista.size()
 	                && Integer.parseInt(lista.get(ponteiroEsquerda).QtdPontos)
 	                        <= Integer.parseInt(pivo.QtdPontos)) {
 	            ponteiroEsquerda++;
 	        }
 
 	        while (ponteiroDireita >= ponteiroEsquerda
+	        		&& ponteiroDireita >= 0
 	                && Integer.parseInt(lista.get(ponteiroDireita).QtdPontos)
 	                        > Integer.parseInt(pivo.QtdPontos)) {
 	            ponteiroDireita--;
@@ -60,7 +62,7 @@ public class QuickSortLista {
 	// Criando um método de troca simples;
 
 	private void trocar(Lista<Professor> lista, int i, int j) throws Exception {
-
+		if (i == j) {return;}
 		Professor p1 = lista.get(i);
 		Professor p2 = lista.get(j);
 

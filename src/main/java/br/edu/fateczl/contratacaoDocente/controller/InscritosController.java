@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 import br.edu.fateczl.contratacaoDocente.estrutura.QuickSortLista;
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
 import br.edu.fateczl.contratacaoDocente.model.Professor;
-import controller.QuickSort;
 import model.Lista;
 
 public class InscritosController implements ActionListener {
@@ -76,12 +75,15 @@ public class InscritosController implements ActionListener {
 				Inscricao inscri = new Inscricao();
 
 				// Popular a Lista com cada objeto lido do arquivo
-
-				inscri.cpfProfessor = vetLinha[0];
-				inscri.codDisciplina = vetLinha[1];
-				inscri.codProcesso = vetLinha[2];
-
-				lista.addLast(inscri);
+				
+				/* adicionando validação de cod disciplina- verificar se está correto depois*/
+								
+				if (inscricao.codDisciplina.equals(vetLinha[1])) {
+					inscri.cpfProfessor = vetLinha[0];
+					inscri.codDisciplina = vetLinha[1];
+					inscri.codProcesso = vetLinha[2];
+					lista.addLast(inscri);
+				}
 
 				linha = buffer.readLine();
 
@@ -96,6 +98,9 @@ public class InscritosController implements ActionListener {
 		// Popula a fila com os professores presentes no arquivo inscrição
 		// Talvez criar uma outra classe chamada inscritos
 		Lista<Professor> listaprof = populaProfessor(lista);
+		
+		// Teste: imprime antes de ordenar para ver se os dados chegam corretos
+
 
 		Lista<Professor> listaOrdenada = ordenarLista(listaprof);
 
@@ -161,39 +166,39 @@ public class InscritosController implements ActionListener {
 
 	// Falta implementar o método!! Coloquei uma biblioteca para teste
 	// Ordena o vetPontos
-	private int[] ordenarPontos(int[] vetPontos) {
-
-		QuickSort q1 = new QuickSort();
-
-		vetPontos = q1.quickSort(vetPontos, 0, vetPontos.length - 1);
-
-		return vetPontos;
-
-	}
-
-	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
-	// em um vetor para ordenação convertendo a String pontuação para inteiro
-
-	// Imprimindo os dados dos professores no TextArea....Como não perder a
-	// informação dos outros professores?
-	private int[] pegarPontos(Lista<Professor> listaprof) throws Exception {
-
-		int tamanho = listaprof.size();
-		int[] vetPontos = new int[tamanho];
-
-		for (int i = 0; i < tamanho; i++) {
-
-			vetPontos[i] = Integer.parseInt(listaprof.get(i).QtdPontos);
-
-		}
-
-		return vetPontos;
-
-	}
-
-	// Método para buscar o professor usando o cpf presente no arquivo
-	// inscricoes.csv
-	// Varrer para pegar os dados dos professores: nome e pontuação
+//	private int[] ordenarPontos(int[] vetPontos) {
+//
+//		QuickSort q1 = new QuickSort();
+//
+//		vetPontos = q1.quickSort(vetPontos, 0, vetPontos.length - 1);
+//
+//		return vetPontos;
+//
+//	}
+//
+//	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
+//	// em um vetor para ordenação convertendo a String pontuação para inteiro
+//
+//	// Imprimindo os dados dos professores no TextArea....Como não perder a
+//	// informação dos outros professores?
+//	private int[] pegarPontos(Lista<Professor> listaprof) throws Exception {
+//
+//		int tamanho = listaprof.size();
+//		int[] vetPontos = new int[tamanho];
+//
+//		for (int i = 0; i < tamanho; i++) {
+//
+//			vetPontos[i] = Integer.parseInt(listaprof.get(i).QtdPontos);
+//
+//		}
+//
+//		return vetPontos;
+//
+//	}
+//
+//	// Método para buscar o professor usando o cpf presente no arquivo
+//	// inscricoes.csv
+//	// Varrer para pegar os dados dos professores: nome e pontuação
 	private Lista<Professor> populaProfessor(Lista<Inscricao> lista) throws Exception {
 
 		Lista<Professor> listaprof = new Lista<>();
@@ -205,6 +210,9 @@ public class InscritosController implements ActionListener {
 			Professor professor = buscaProfessor(lista.get(i).cpfProfessor);
 
 			listaprof.add(professor, i); // Inserindo o professor na fila
+			if (professor == null) {
+	            throw new Exception("Professor com CPF " + lista.get(i).cpfProfessor + " não encontrado no professor.csv");
+	        }
 
 		}
 
