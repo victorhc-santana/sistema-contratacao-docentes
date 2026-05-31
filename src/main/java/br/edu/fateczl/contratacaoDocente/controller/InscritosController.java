@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.edu.fateczl.contratacaoDocente.estrutura.QuickSortLista;
 import br.edu.fateczl.contratacaoDocente.model.Inscricao;
 import br.edu.fateczl.contratacaoDocente.model.Professor;
 import controller.QuickSort;
@@ -41,16 +42,15 @@ public class InscritosController implements ActionListener {
 			}
 		}
 	}
-	
-	
+
 	private void busca() throws Exception {
-		
+
 		Inscricao inscricao = new Inscricao();
-		
+
 		inscricao.codDisciplina = tfCodigoDisciplinaConsulta.getText();
 
 		consultarProf(inscricao);
-		
+
 	}
 
 	// Criando uma lista com os dados vindos diretamente do arquivo inscricoes.csv.
@@ -96,29 +96,67 @@ public class InscritosController implements ActionListener {
 		// Talvez criar uma outra classe chamada inscritos
 		Lista<Professor> listaprof = populaProfessor(lista);
 
-		int[] vetPontos = pegarPontos(listaprof);
+		Lista<Professor> listaOrdenada = ordenarLista(listaprof);
 
-		vetPontos = ordenarPontos(vetPontos);
+		// Método para imprimir a lista ordenada, somente mostrando os pontos dos
+		// professores
 
-		imprimeVetor(vetPontos);
+		imprimeLista(listaOrdenada);
+
+		// int[] vetPontos = pegarPontos(listaprof);
+
+		// vetPontos = ordenarPontos(vetPontos);
+
+		// imprimeVetor(vetPontos);
+
+	}
+
+	private void imprimeLista(Lista<Professor> listaOrdenada) throws Exception {
+
+		int tamanho = listaOrdenada.size();
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < tamanho; i++) {
+
+			// System.out.println("Nome: " + listaOrdenada.get(i).nome + " -Area: " +
+			// listaOrdenada.get(i).area
+			// + " -Quantidade Pontos: " + listaOrdenada.get(i).QtdPontos);
+
+			sb.append("CPF: " + listaOrdenada.get(i).cpf +" -Nome: " + listaOrdenada.get(i).nome + " -Area: " + listaOrdenada.get(i).area
+					+ " -Quantidade Pontos: " + listaOrdenada.get(i).QtdPontos + "\n");
+			
+		}
+		
+		taConsulta.setText(sb.toString());
+
+	}
+
+	private Lista<Professor> ordenarLista(Lista<Professor> listaprof) throws Exception {
+
+		QuickSortLista q1 = new QuickSortLista();
+
+		listaprof = q1.quickSort(listaprof, 0, listaprof.size() - 1);
+
+		return listaprof;
 
 	}
 
 	// Imprimir o vetor de pontos no text area para ver se está funcionando
-	private void imprimeVetor(int[] vetPontos) {
-		
-		StringBuilder sb = new StringBuilder();
+	// private void imprimeVetor(int[] vetPontos) {
 
-		for (int i = 0; i < vetPontos.length; i++) {
+	// StringBuilder sb = new StringBuilder();
 
-			sb.append(vetPontos[i]).append("\n");
-			//taConsulta.setText(Integer.toString(vetPontos[i]));
+	// for (int i = 0; i < vetPontos.length; i++) {
 
-		}
-		
-		taConsulta.setText(sb.toString());
-		
-	}
+	// sb.append(vetPontos[i]).append("\n");
+	// taConsulta.setText(Integer.toString(vetPontos[i]));
+
+	// }
+
+	// taConsulta.setText(sb.toString());
+
+	// }
 
 	// Falta implementar o método!! Coloquei uma biblioteca para teste
 	// Ordena o vetPontos
@@ -135,6 +173,8 @@ public class InscritosController implements ActionListener {
 	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
 	// em um vetor para ordenação convertendo a String pontuação para inteiro
 
+	// Imprimindo os dados dos professores no TextArea....Como não perder a
+	// informação dos outros professores?
 	private int[] pegarPontos(Lista<Professor> listaprof) throws Exception {
 
 		int tamanho = listaprof.size();
