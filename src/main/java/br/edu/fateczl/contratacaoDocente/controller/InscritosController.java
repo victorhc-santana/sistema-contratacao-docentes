@@ -38,7 +38,7 @@ public class InscritosController implements ActionListener {
 			try {
 				busca();
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taConsulta.setText("Erro: " + e1.getMessage());;
 			}
 		}
 	}
@@ -48,6 +48,7 @@ public class InscritosController implements ActionListener {
 		Inscricao inscricao = new Inscricao();
 
 		inscricao.codDisciplina = tfCodigoDisciplinaConsulta.getText();
+		validaEntradaCodDisc(inscricao);
 
 		consultarProf(inscricao);
 
@@ -257,5 +258,10 @@ public class InscritosController implements ActionListener {
 
 		return null; // Verificar se é para retornar null
 
+	}
+	private void validaEntradaCodDisc(Inscricao inscrito) throws Exception{
+		if (inscrito.codDisciplina == null) {
+			throw new Exception("CPF esta vazio");
+		}
 	}
 }
