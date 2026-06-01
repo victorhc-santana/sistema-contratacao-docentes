@@ -43,37 +43,47 @@ public class inscricaoController implements ActionListener {
 			try {
 				cadastro();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Consultar")) {
 			try {
 				busca();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Atualizar")) {
 			try {
 				atualizar();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				tainscricao.setText("Erro: " + e1.getMessage());
 			}
+		}
+		if (cmd.equals("Listar")) {
+			try {
+				listar();
+			} catch (Exception e1) {
+				tainscricao.setText("Erro: " + e1.getMessage());
+			}
+		}
+		if (cmd.equals("Limpar")) {
+			limpar();
 		}
 
 	}
@@ -84,7 +94,7 @@ public class inscricaoController implements ActionListener {
 		inscricao.codDisciplina = tfcodigoDisciplina.getText();
 		inscricao.codProcesso = tfcodigoProcesso.getText();
 		inscricao.cpfProfessor = tfcpfInscricao.getText();
-
+		validaInscricao(inscricao);
 		// Só pode se inscrever se o professor estiver presente no professor.csv
 		// Preciso verificar se o professor está presente no arquivo professor.csv antes
 		// de iniciar o cadastro
@@ -188,6 +198,7 @@ public class inscricaoController implements ActionListener {
 
 		Inscricao inscricao = new Inscricao();
 		inscricao.codProcesso = tfcodigoProcesso.getText();
+		validaInscricao(inscricao);
 
 		inscricao = buscaInscricao(inscricao);
 		if (inscricao.codProcesso != null) {
@@ -269,6 +280,7 @@ public class inscricaoController implements ActionListener {
 		inscricao.codDisciplina = tfcodigoDisciplina.getText();
 		inscricao.codProcesso = tfcodigoProcesso.getText();
 		inscricao.cpfProfessor = tfcpfInscricao.getText();
+		validaInscricao(inscricao);
 
 		atualizarInscricao(inscricao);
 		tfcodigoDisciplina.setText("");
@@ -378,6 +390,7 @@ public class inscricaoController implements ActionListener {
 		inscricao.codDisciplina = tfcodigoDisciplina.getText();
 		inscricao.codProcesso = tfcodigoProcesso.getText();
 		inscricao.cpfProfessor = tfcpfInscricao.getText();
+		validaInscricao(inscricao);
 
 		removerInscricao(inscricao);
 		tfcodigoDisciplina.setText("");
@@ -474,5 +487,71 @@ public class inscricaoController implements ActionListener {
 		fw.close();
 
 	}
+	private void listar() throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "inscricoes.csv");
 
+		Fila<Inscricao> fila = new Fila<>(); // Criando uma fila com objeto inscricao
+
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			// lendo o arquivo para popular a fila;
+			while (linha != null) {
+				// Divide a String por ; e insere no vetor vetLinha
+				String[] vetLinha = linha.split(";");
+
+				Inscricao inscri = new Inscricao();
+
+				// Popular a Fila com cada objeto lido do arquivo
+
+				inscri.codProcesso = vetLinha[0];
+				inscri.cpfProfessor = vetLinha[1];
+				inscri.codDisciplina = vetLinha[2];
+
+				// Insere o objeto prof na Fila criada
+				fila.insert(inscri);
+
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		listarInscricao(fila);
+	}
+
+	private void listarInscricao(Fila<Inscricao> fila) {
+		Inscricao atual;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i<fila.size(); i++) {
+			atual = fila.remove();
+			sb.append("CPF: " + atual.cpfProfessor +" -Codigo da disciplina: " + atual.codDisciplina +
+					" -Codigo do processo: "+ atual.codProcesso+  "\n");
+		}
+		tainscricao.setText(sb.toString());
+		
+	}
+	private void limpar() {
+		tfcodigoDisciplina.setText("");
+		tfcodigoProcesso.setText("");
+		tfcpfInscricao.setText("");
+	}
+	private void validaInscricao(Inscricao inscricao) throws Exception{
+		if (inscricao.cpfProfessor == null) {
+			throw new Exception("CPF esta vazio");
+		}
+		if (inscricao.cpfProfessor.length() != 11) {
+			throw new Exception("CPF deve ter 11 digitos");
+		}
+		
+		if(!inscricao.cpfProfessor.matches("\\d+")) {
+			throw new Exception("CPF deve conter apenas numeros");
+		}
+	}
 }

@@ -80,6 +80,16 @@ public class professorControl implements ActionListener {
 				taProfessor.setText("Erro: " + e1.getMessage());
 			}
 		}
+		if (cmd.equals("Listar")) {
+			try {
+				listar();
+			} catch (Exception e1) {
+				taProfessor.setText("Erro: " + e1.getMessage());
+			}
+		}
+		if (cmd.equals("Limpar")) {
+			limpar();
+		}
 
 	}
 
@@ -361,7 +371,7 @@ public class professorControl implements ActionListener {
 		validaProfessor(professor);
 		if (professor.nome != null) {
 			taProfessor.setText(
-					"CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos + "- Area: " + professor.area);
+					"CPF: " + professor.cpf + " - Nome: " + professor.nome + " - Pontuação: " + professor.QtdPontos + " - Area: " + professor.area);
 		} else {
 			taProfessor.setText("Professor não encontrado");
 		}
@@ -434,7 +444,61 @@ public class professorControl implements ActionListener {
 
 		return professor;
 	}
-	
+	private void listar() throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "professor.csv");
+
+		Fila<Professor> fila = new Fila<>(); // Criando uma fila com objeto professor
+
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			// lendo o arquivo para popular a fila;
+			while (linha != null) {
+				// Divide a String por ; e insere no vetor vetLinha
+				String[] vetLinha = linha.split(";");
+
+				Professor prof = new Professor();
+
+				// Popular a Fila com cada objeto lido do arquivo
+
+				prof.cpf = vetLinha[0];
+				prof.nome = vetLinha[1];
+				prof.area = vetLinha[2];
+				prof.QtdPontos = vetLinha[3];
+
+				// Insere o objeto prof na Fila criada
+				fila.insert(prof);
+
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		listarProfessor(fila);
+	}
+	private void listarProfessor(Fila<Professor> fila) {
+		Professor atual;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i<fila.size(); i++) {
+			atual = fila.remove();
+			sb.append("CPF: " + atual.cpf +" -Nome: " + atual.nome + " -Area: " + atual.area
+					+ " -Quantidade Pontos: " + atual.QtdPontos + "\n");
+		}
+		taProfessor.setText(sb.toString());	
+	}
+	private void limpar() {
+		tfProfessorArea.setText("");
+		tfProfessorCpf.setText("");
+		tfProfessorNome.setText("");
+		tfProfessorPontos.setText("");
+	}
 	private void validaProfessor(Professor professor) throws Exception{
 		if (professor.cpf == null) {
 			throw new Exception("CPF esta vazio");

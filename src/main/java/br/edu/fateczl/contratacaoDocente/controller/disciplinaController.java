@@ -49,37 +49,49 @@ public class disciplinaController implements ActionListener {
 			try {
 				cadastro();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro no arquivo :" + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro:" + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Consultar")) {
 			try {
 				busca();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro no arquivo :" + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro:" + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Atualizar")) {
 			try {
 				atualizar();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro no arquivo :" + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro:" + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro no arquivo :" + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taDisciplina.setText("erro:" + e1.getMessage());
 			}
+		}
+		if (cmd.equals("Listar")) {
+			
+			try {
+				listar();
+			} catch (Exception e1) {
+				taDisciplina.setText("erro:" + e1.getMessage());
+			}
+		if (cmd.equals("Limpar")) {
+			limpar();
+		}
+			
 		}
 
 	}
@@ -420,6 +432,67 @@ public class disciplinaController implements ActionListener {
 		pw.close();
 		fw.close();
 
+	}
+	
+	private void listar() throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "disciplinas.csv");
+
+		Fila<Disciplina> fila = new Fila<>();
+
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			while (linha != null) {
+
+				String[] vetLinha = linha.split(";");
+
+				Disciplina disc = new Disciplina();
+
+				disc.codCurso = vetLinha[0];
+				disc.codigoDisciplina = vetLinha[1];
+				disc.diaSemana = vetLinha[2];
+				disc.horaInicial = vetLinha[3];
+				disc.horasDiarias = vetLinha[4];
+				disc.nomeDisciplina = vetLinha[5];
+
+				// Insere o objeto prof na Fila criada
+				fila.insert(disc);
+
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		listarDisciplina(fila);
+	}
+
+	private void listarDisciplina(Fila<Disciplina> fila) {
+		Disciplina atual;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i<fila.size(); i++) {
+			atual = fila.remove();
+			sb.append("Codigo Curso: " + atual.codCurso + " - Nome Disciplina: "
+					+ atual.nomeDisciplina + " - Codigo Disciplina" + atual.codigoDisciplina
+					+ " - Dia da Semana: " + atual.diaSemana + " - Hora Inicial: " + atual.horaInicial
+					+ " - Horas Diarias: " + atual.horasDiarias + "\n");
+		}
+		taDisciplina.setText(sb.toString());
+		
+	}
+	private void limpar() {
+		tfCodigoCursoDisciplina.setText("");
+		tfCodigoDisciplina.setText("");
+		tfDiadaSemana.setText("");
+		tfHorarioInicial.setText("");
+		tfHorasDiarias.setText("");
+		tfNomeDisciplina.setText("");
 	}
 
 }

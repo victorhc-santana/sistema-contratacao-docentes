@@ -14,7 +14,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.edu.fateczl.contratacaoDocente.model.Curso;
-//import br.edu.fateczl.contratacaoDocente.model.Professor;
 import br.edu.fateczl.fila.Fila;
 import model.Lista;
 
@@ -42,33 +41,45 @@ public class cursoController implements ActionListener {
 			try {
 				cadastro();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taCurso.setText("Erro no arquivo: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Consultar")) {
 			try {
 				busca();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taCurso.setText("Erro no arquivo: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Atualizar")) {
 			try {
 				atualizar();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taCurso.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taCurso.setText("erro: " + e1.getMessage());
 			}
 		}
 		if (cmd.equals("Remover")) {
 			try {
 				remover();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				taCurso.setText("Erro no arquivo: " + e1.getMessage());
 			} catch (Exception e1) {
-				e1.printStackTrace();
+				taCurso.setText("erro: " + e1.getMessage());
 			}
+		}
+		if (cmd.equals("Listar")) {
+			try {
+				listar();
+			} catch (IOException e1) {
+				taCurso.setText("Erro no arquivo: " + e1.getMessage());
+			} catch (Exception e1) {
+				taCurso.setText("erro: " + e1.getMessage());
+			}
+		}
+		if (cmd.equals("limpar")) {
+			limpar();
 		}
 
 	}
@@ -400,6 +411,63 @@ public class cursoController implements ActionListener {
 		pw.close();
 		fw.close();
 
+	}
+	
+	private void listar() throws Exception {
+		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
+		File arq = new File(path, "cursos.csv");
+
+		Fila<Curso> fila = new Fila<>(); // Criando uma fila com objeto curso
+
+		if (arq.exists() && arq.isFile()) {
+			FileInputStream fis = new FileInputStream(arq);
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buffer = new BufferedReader(isr);
+			String linha = buffer.readLine();
+
+			// lendo o arquivo para popular a fila;
+			while (linha != null) {
+				// Divide a String por ; e insere no vetor vetLinha
+				String[] vetLinha = linha.split(";");
+
+				Curso cursoBusca = new Curso();
+
+				// Popular a Fila com cada objeto lido do arquivo
+
+				cursoBusca.codCurso = vetLinha[0];
+				cursoBusca.nomeCurso = vetLinha[1];
+				cursoBusca.areaCurso = vetLinha[2];
+
+				// Insere o objeto prof na Fila
+				fila.insert(cursoBusca);
+
+				linha = buffer.readLine();
+
+			}
+
+			buffer.close();
+			isr.close();
+			fis.close();
+		}
+		listarCurso(fila);
+	}
+
+	private void listarCurso(Fila<Curso> fila) {
+		Curso atual;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i<fila.size(); i++) {
+			atual = fila.remove();
+			sb.append("Codigo curso: " + atual.codCurso + " - Nome curso: " + atual.nomeCurso
+					+ " - Area conhecimento: " + atual.areaCurso + "\n");
+		}
+		taCurso.setText(sb.toString());	
+		
+	}
+	
+	private void limpar() {
+		tfareaCurso.setText("");
+		tfcodigoCurso.setText("");
+		tfnomeCurso.setText("");
 	}
 
 }
