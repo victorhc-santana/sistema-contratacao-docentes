@@ -180,12 +180,12 @@ public class disciplinaController implements ActionListener {
 
 				Disciplina disc = new Disciplina();
 
-				disc.codCurso = vetLinha[0];
-				disc.codigoDisciplina = vetLinha[1];
+				disc.codigoDisciplina  = vetLinha[0];
+				disc.nomeDisciplina = vetLinha[1];
 				disc.diaSemana = vetLinha[2];
 				disc.horaInicial = vetLinha[3];
 				disc.horasDiarias = vetLinha[4];
-				disc.nomeDisciplina = vetLinha[5];
+				disc.codCurso = vetLinha[5];
 
 				// Insere o objeto prof na Fila criada
 				fila.insert(disc);
@@ -263,12 +263,12 @@ public class disciplinaController implements ActionListener {
 
 				Disciplina disc = new Disciplina();
 
-				disc.codCurso = vetLinha[0];
-				disc.codigoDisciplina = vetLinha[1];
+				disc.codigoDisciplina = vetLinha[0];
+				disc.nomeDisciplina = vetLinha[1];
 				disc.diaSemana = vetLinha[2];
 				disc.horaInicial = vetLinha[3];
 				disc.horasDiarias = vetLinha[4];
-				disc.nomeDisciplina = vetLinha[5];
+				disc.codCurso = vetLinha[5];
 
 				lista.addLast(disc);
 
@@ -371,12 +371,12 @@ public class disciplinaController implements ActionListener {
 
 				Disciplina disc = new Disciplina();
 
-				disc.codCurso = vetLinha[0];
-				disc.codigoDisciplina = vetLinha[1];
+				disc.codigoDisciplina = vetLinha[0];
+				disc.nomeDisciplina = vetLinha[1];
 				disc.diaSemana = vetLinha[2];
 				disc.horaInicial = vetLinha[3];
 				disc.horasDiarias = vetLinha[4];
-				disc.nomeDisciplina = vetLinha[5];
+				disc.codCurso = vetLinha[5];
 
 				lista.addLast(disc);
 
@@ -452,12 +452,12 @@ public class disciplinaController implements ActionListener {
 
 				Disciplina disc = new Disciplina();
 
-				disc.codCurso = vetLinha[0];
-				disc.codigoDisciplina = vetLinha[1];
+				disc.codigoDisciplina = vetLinha[0];
+				disc.nomeDisciplina = vetLinha[1];
 				disc.diaSemana = vetLinha[2];
 				disc.horaInicial = vetLinha[3];
 				disc.horasDiarias = vetLinha[4];
-				disc.nomeDisciplina = vetLinha[5];
+				disc.codCurso = vetLinha[5];
 
 				// Insere o objeto prof na Fila criada
 				fila.insert(disc);
