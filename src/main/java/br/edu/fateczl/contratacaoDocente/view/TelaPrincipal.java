@@ -11,6 +11,7 @@ import br.edu.fateczl.contratacaoDocente.controller.cursoController;
 import br.edu.fateczl.contratacaoDocente.controller.disciplinaController;
 import br.edu.fateczl.contratacaoDocente.controller.inscricaoController;
 import br.edu.fateczl.contratacaoDocente.controller.professorControl;
+import br.edu.fateczl.contratacaoDocente.controller.discAbertaController;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -455,7 +456,7 @@ public class TelaPrincipal extends JFrame {
 		JPanel tabDiscipAbertas = new JPanel();
 		tabbedPane.addTab("Disciplinas Abertas", null, tabDiscipAbertas, null);
 		tabDiscipAbertas.setLayout(null);
-		//falta implementar
+		
 		JTextArea textArea_1_1_1_1_1 = new JTextArea();
 		textArea_1_1_1_1_1.setBounds(10, 142, 601, 262);
 		tabDiscipAbertas.add(textArea_1_1_1_1_1);
@@ -464,18 +465,17 @@ public class TelaPrincipal extends JFrame {
 		lblNewLabel_1_2_2_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1_2_1_1.setBounds(10, 11, 362, 55);
 		tabDiscipAbertas.add(lblNewLabel_1_2_2_1_2_1_1);
-		//falta implementar
+		
 		JButton btnConsultar_1_1_1_1_1 = new JButton("Consultar");
 		btnConsultar_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1_1_1_1_1.setBounds(136, 64, 119, 36);
-		tabDiscipAbertas.add(btnConsultar_1_1_1_1_1);
-		//falta implementar
-		JButton btnLimpar_1_1_1_1 = new JButton("Limpar");
-		btnLimpar_1_1_1_1.setBounds(327, 64, 109, 36);
-		tabDiscipAbertas.add(btnLimpar_1_1_1_1);
+		tabDiscipAbertas.add(btnConsultar_1_1_1_1_1);		
 		
 		InscritosController inscritosControl = new InscritosController(txtCodigoDisciplinaConsulta, textArea_1_1_1_1);
 		btnConsultar_1_1_1_1.addActionListener(inscritosControl);
-
+		
+		discAbertaController discAbertaControl = new discAbertaController(textArea_1_1_1_1_1);
+		btnConsultar_1_1_1_1_1.addActionListener(discAbertaControl);
+		
 	}
 }
