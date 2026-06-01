@@ -83,6 +83,8 @@ public class InscritosController implements ActionListener {
 					inscri.codDisciplina = vetLinha[1];
 					inscri.codProcesso = vetLinha[2];
 					lista.addLast(inscri);
+				}else {
+					taConsulta.setText("Disciplina não encontrada");
 				}
 
 				linha = buffer.readLine();
