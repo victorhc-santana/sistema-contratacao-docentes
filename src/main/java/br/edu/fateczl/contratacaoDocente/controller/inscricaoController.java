@@ -235,9 +235,9 @@ public class inscricaoController implements ActionListener {
 
 				// Popular a Fila com cada objeto lido do arquivo
 
-				inscri.codProcesso = vetLinha[0];
-				inscri.cpfProfessor = vetLinha[1];
-				inscri.codDisciplina = vetLinha[2];
+				inscri.cpfProfessor = vetLinha[0];
+				inscri.codDisciplina = vetLinha[1];
+				inscri.codProcesso = vetLinha[2];
 
 				// Insere o objeto prof na Fila criada
 				fila.insert(inscri);
@@ -313,9 +313,9 @@ public class inscricaoController implements ActionListener {
 
 				// vai popular o objeto inscri com as características
 
-				inscri.codDisciplina = vetLinha[0];
-				inscri.codProcesso = vetLinha[1];
-				inscri.cpfProfessor = vetLinha[2];
+				inscri.cpfProfessor = vetLinha[0];
+				inscri.codDisciplina = vetLinha[1];
+				inscri.codProcesso = vetLinha[2];
 
 				lista.addLast(inscri);
 
@@ -424,9 +424,9 @@ public class inscricaoController implements ActionListener {
 
 				// Popular a Lista com cada objeto lido do arquivo
 
-				inscri.codDisciplina = vetLinha[0];
-				inscri.codProcesso = vetLinha[1];
-				inscri.cpfProfessor = vetLinha[2];
+				inscri.cpfProfessor = vetLinha[0];
+				inscri.codDisciplina = vetLinha[1];
+				inscri.codProcesso = vetLinha[2];
 
 				// Insere o objeto prof na Lista criada
 				lista.addLast(inscri);
@@ -508,9 +508,9 @@ public class inscricaoController implements ActionListener {
 
 				// Popular a Fila com cada objeto lido do arquivo
 
-				inscri.codProcesso = vetLinha[0];
-				inscri.cpfProfessor = vetLinha[1];
-				inscri.codDisciplina = vetLinha[2];
+				inscri.cpfProfessor = vetLinha[0];
+				inscri.codDisciplina = vetLinha[1];
+				inscri.codProcesso = vetLinha[2];
 
 				// Insere o objeto prof na Fila criada
 				fila.insert(inscri);
