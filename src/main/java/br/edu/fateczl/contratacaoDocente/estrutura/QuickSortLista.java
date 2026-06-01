@@ -60,18 +60,39 @@ public class QuickSortLista {
 	}
 
 	// Criando um método de troca simples;
-
+	
 	private void trocar(Lista<Professor> lista, int i, int j) throws Exception {
-		if (i == j) {return;}
-		Professor p1 = lista.get(i);
-		Professor p2 = lista.get(j);
+	    if (i == j) {
+	        return;
+	    }
 
-		lista.remove(j);
-		lista.add(p1, i);
+	    // 1. Guardamos as referências dos dois professores antes de mexer na lista
+	    Professor p1 = lista.get(i);
+	    Professor p2 = lista.get(j);
 
-		lista.remove(i);
-		lista.add(p2, j);
+	    // 2. Removemos o elemento da posição 'i'
+	    lista.remove(i);
+	    // 3. Inserimos o 'pJ' (que estava em j) exatamente na posição 'i' que acabou de vagar
+	    lista.add(p2, i);
 
+	    // 4. Fazemos o mesmo com a outra ponta: removemos quem está em 'j'
+	    lista.remove(j);
+	    // 5. Inserimos o 'pI' (que estava em i) na posição 'j' que acabou de vagar
+	    lista.add(p1, j);
 	}
+	
 
+	//private void trocar(Lista<Professor> lista, int i, int j) throws Exception {
+		//if (i == j) {return;}
+		//Professor p1 = lista.get(i);
+		//Professor p2 = lista.get(j);
+
+		//lista.remove(j);
+		//lista.add(p1, i);
+
+		//lista.remove(i);
+		//lista.add(p2, j);
+
+	//}
+	
 }
