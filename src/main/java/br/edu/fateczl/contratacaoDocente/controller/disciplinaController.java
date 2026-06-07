@@ -88,10 +88,9 @@ public class disciplinaController implements ActionListener {
 			} catch (Exception e1) {
 				taDisciplina.setText("erro:" + e1.getMessage());
 			}
+		}
 		if (cmd.equals("Limpar")) {
 			limpar();
-		}
-			
 		}
 
 	}

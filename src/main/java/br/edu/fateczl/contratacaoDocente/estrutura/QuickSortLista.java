@@ -38,14 +38,14 @@ public class QuickSortLista {
 	        while (ponteiroEsquerda <= ponteiroDireita
 	        		&& ponteiroEsquerda < lista.size()
 	                && Integer.parseInt(lista.get(ponteiroEsquerda).QtdPontos)
-	                        <= Integer.parseInt(pivo.QtdPontos)) {
+	                        >= Integer.parseInt(pivo.QtdPontos)) { 
 	            ponteiroEsquerda++;
 	        }
 
 	        while (ponteiroDireita >= ponteiroEsquerda
 	        		&& ponteiroDireita >= 0
 	                && Integer.parseInt(lista.get(ponteiroDireita).QtdPontos)
-	                        > Integer.parseInt(pivo.QtdPontos)) {
+	                        < Integer.parseInt(pivo.QtdPontos)) { 
 	            ponteiroDireita--;
 	        }
 
@@ -59,25 +59,20 @@ public class QuickSortLista {
 	    return ponteiroDireita;
 	}
 
-	// Criando um método de troca simples;
+	// Criando um método de troca simples evitando a perda de referência do professor
 	
 	private void trocar(Lista<Professor> lista, int i, int j) throws Exception {
 	    if (i == j) {
 	        return;
 	    }
 
-	    // 1. Guardamos as referências dos dois professores antes de mexer na lista
 	    Professor p1 = lista.get(i);
 	    Professor p2 = lista.get(j);
 
-	    // 2. Removemos o elemento da posição 'i'
 	    lista.remove(i);
-	    // 3. Inserimos o 'pJ' (que estava em j) exatamente na posição 'i' que acabou de vagar
 	    lista.add(p2, i);
 
-	    // 4. Fazemos o mesmo com a outra ponta: removemos quem está em 'j'
 	    lista.remove(j);
-	    // 5. Inserimos o 'pI' (que estava em i) na posição 'j' que acabou de vagar
 	    lista.add(p1, j);
 	}
 		

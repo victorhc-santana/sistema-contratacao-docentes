@@ -78,7 +78,7 @@ public class cursoController implements ActionListener {
 				taCurso.setText("erro: " + e1.getMessage());
 			}
 		}
-		if (cmd.equals("limpar")) {
+		if (cmd.equals("Limpar")) {
 			limpar();
 		}
 
