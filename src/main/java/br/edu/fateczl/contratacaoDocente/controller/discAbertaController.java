@@ -45,7 +45,7 @@ public class discAbertaController implements ActionListener{
 		String path = System.getProperty("user.home") + File.separator + "SistemaCadastro";
         File arqInsc = new File(path, "inscricoes.csv");
 
-        TabelaHash tabela = new TabelaHash(20);
+        TabelaHash tabela = new TabelaHash(75);
 
         if (arqInsc.exists() && arqInsc.isFile()) {
             FileInputStream fis = new FileInputStream(arqInsc);

@@ -111,12 +111,6 @@ public class InscritosController implements ActionListener {
 
 		imprimeLista(listaOrdenada);
 
-		// int[] vetPontos = pegarPontos(listaprof);
-
-		// vetPontos = ordenarPontos(vetPontos);
-
-		// imprimeVetor(vetPontos);
-
 	}
 
 	private void imprimeLista(Lista<Professor> listaOrdenada) throws Exception {
@@ -126,10 +120,6 @@ public class InscritosController implements ActionListener {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < tamanho; i++) {
-
-			// System.out.println("Nome: " + listaOrdenada.get(i).nome + " -Area: " +
-			// listaOrdenada.get(i).area
-			// + " -Quantidade Pontos: " + listaOrdenada.get(i).QtdPontos);
 
 			sb.append("CPF: " + listaOrdenada.get(i).cpf +" -Nome: " + listaOrdenada.get(i).nome + " -Area: " + listaOrdenada.get(i).area
 					+ " -Quantidade Pontos: " + listaOrdenada.get(i).QtdPontos + "\n");
@@ -149,55 +139,6 @@ public class InscritosController implements ActionListener {
 		return listaprof;
 
 	}
-
-	// Imprimir o vetor de pontos no text area para ver se está funcionando
-	// private void imprimeVetor(int[] vetPontos) {
-
-	// StringBuilder sb = new StringBuilder();
-
-	// for (int i = 0; i < vetPontos.length; i++) {
-
-	// sb.append(vetPontos[i]).append("\n");
-	// taConsulta.setText(Integer.toString(vetPontos[i]));
-
-	// }
-
-	// taConsulta.setText(sb.toString());
-
-	// }
-
-	// Falta implementar o método!! Coloquei uma biblioteca para teste
-	// Ordena o vetPontos
-//	private int[] ordenarPontos(int[] vetPontos) {
-//
-//		QuickSort q1 = new QuickSort();
-//
-//		vetPontos = q1.quickSort(vetPontos, 0, vetPontos.length - 1);
-//
-//		return vetPontos;
-//
-//	}
-//
-//	// Método para pegar a quantidade de pontos de cada professor inscrito e salvar
-//	// em um vetor para ordenação convertendo a String pontuação para inteiro
-//
-//	// Imprimindo os dados dos professores no TextArea....Como não perder a
-//	// informação dos outros professores?
-//	private int[] pegarPontos(Lista<Professor> listaprof) throws Exception {
-//
-//		int tamanho = listaprof.size();
-//		int[] vetPontos = new int[tamanho];
-//
-//		for (int i = 0; i < tamanho; i++) {
-//
-//			vetPontos[i] = Integer.parseInt(listaprof.get(i).QtdPontos);
-//
-//		}
-//
-//		return vetPontos;
-//
-//	}
-//
 //	// Método para buscar o professor usando o cpf presente no arquivo
 //	// inscricoes.csv
 //	// Varrer para pegar os dados dos professores: nome e pontuação

@@ -93,8 +93,6 @@ public class professorControl implements ActionListener {
 
 	}
 
-	// COMENTARIO PARA CORRECAO ==> NESSE CASO atualizarProf ESTA ESPERANDO UM
-	// OBJETO DO TIPO PROFESSOR, MAS ESTOU PASSANDO UMA STRING
 	private void atualizar() throws Exception {
 
 		Professor professor = new Professor();

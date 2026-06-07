@@ -15,7 +15,6 @@ import br.edu.fateczl.contratacaoDocente.controller.discAbertaController;
 
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
