@@ -82,32 +82,32 @@ public class TelaPrincipal extends JFrame {
 		tabDisciplina.setLayout(null);
 		
 		JLabel lblCodDisciplina = new JLabel("Código da disciplina:");
-		lblCodDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblCodDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCodDisciplina.setBounds(10, 11, 180, 25);
 		tabDisciplina.add(lblCodDisciplina);
 		
 		JLabel lblNomeDaDisciplina = new JLabel("Nome da disciplina:");
-		lblNomeDaDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNomeDaDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNomeDaDisciplina.setBounds(320, 11, 180, 25);
 		tabDisciplina.add(lblNomeDaDisciplina);
 		
 		JLabel lblDiaDaSemana = new JLabel("Dia da semana:");
-		lblDiaDaSemana.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblDiaDaSemana.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDiaDaSemana.setBounds(10, 47, 180, 25);
 		tabDisciplina.add(lblDiaDaSemana);
 		
 		JLabel lblHorrioInicial = new JLabel("Horário inicial:");
-		lblHorrioInicial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblHorrioInicial.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHorrioInicial.setBounds(330, 47, 180, 25);
 		tabDisciplina.add(lblHorrioInicial);
 		
 		JLabel lblHorasDirias = new JLabel("Horas diárias:");
-		lblHorasDirias.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblHorasDirias.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblHorasDirias.setBounds(10, 83, 180, 25);
 		tabDisciplina.add(lblHorasDirias);
 		
 		JLabel lblCdigoDoCurso = new JLabel("Código do curso:");
-		lblCdigoDoCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblCdigoDoCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCdigoDoCurso.setBounds(320, 83, 180, 25);
 		tabDisciplina.add(lblCdigoDoCurso);
 		
@@ -158,7 +158,6 @@ public class TelaPrincipal extends JFrame {
 		tabDisciplina.add(btnRemover);
 		
 		JButton btnConsultar = new JButton("Consultar");
-		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar.setBounds(392, 133, 96, 22);
 		tabDisciplina.add(btnConsultar);
 		
@@ -192,7 +191,7 @@ public class TelaPrincipal extends JFrame {
 		tabCursos.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("Código do curso:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1.setBounds(10, 11, 150, 27);
 		tabCursos.add(lblNewLabel_1);
 		
@@ -206,7 +205,7 @@ public class TelaPrincipal extends JFrame {
 		tabCursos.add(txtCodigoCurso);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nome do curso:");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1.setBounds(10, 51, 150, 27);
 		tabCursos.add(lblNewLabel_1_1);
 		
@@ -216,7 +215,7 @@ public class TelaPrincipal extends JFrame {
 		tabCursos.add(txtNomeCurso);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Área de conhecimento:");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_1_1.setBounds(10, 89, 150, 27);
 		tabCursos.add(lblNewLabel_1_1_1);
 		
@@ -234,7 +233,7 @@ public class TelaPrincipal extends JFrame {
 		tabCursos.add(btnAtualizar_1);
 		
 		JButton btnConsultar_1 = new JButton("Consultar");
-		btnConsultar_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		//btnConsultar_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1.setBounds(385, 140, 96, 22);
 		tabCursos.add(btnConsultar_1);
 		
@@ -267,7 +266,7 @@ public class TelaPrincipal extends JFrame {
 		tabProfessores.setLayout(null);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("CPF:");
-		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2.setBounds(10, 11, 150, 27);
 		tabProfessores.add(lblNewLabel_1_2);
 		
@@ -277,7 +276,7 @@ public class TelaPrincipal extends JFrame {
 		tabProfessores.add(tfProfessorCpf);
 		
 		JLabel lblNewLabel_1_2_1 = new JLabel("Nome Completo:");
-		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1.setBounds(239, 11, 150, 27);
 		tabProfessores.add(lblNewLabel_1_2_1);
 		
@@ -287,7 +286,7 @@ public class TelaPrincipal extends JFrame {
 		tabProfessores.add(tfProfessorNome);
 		
 		JLabel lblNewLabel_1_2_1_1 = new JLabel("Área Pretendida:");
-		lblNewLabel_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1_1.setBounds(239, 49, 150, 27);
 		tabProfessores.add(lblNewLabel_1_2_1_1);
 		
@@ -297,7 +296,7 @@ public class TelaPrincipal extends JFrame {
 		tabProfessores.add(tfProfessorArea);
 		
 		JLabel lblNewLabel_1_2_1_2 = new JLabel("Pontuação:");
-		lblNewLabel_1_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1_2.setBounds(10, 49, 109, 27);
 		tabProfessores.add(lblNewLabel_1_2_1_2);
 		
@@ -319,7 +318,7 @@ public class TelaPrincipal extends JFrame {
 		tabProfessores.add(btnAtualizar_1_1);
 		
 		JButton btnConsultar_1_1 = new JButton("Consultar");
-		btnConsultar_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		//btnConsultar_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1_1.setBounds(390, 126, 96, 22);
 		tabProfessores.add(btnConsultar_1_1);
 		
@@ -358,7 +357,7 @@ public class TelaPrincipal extends JFrame {
 		tabInscrições.add(textArea_1_1_1);
 		
 		JLabel lblNewLabel_1_2_2 = new JLabel("CPF do Professor:");
-		lblNewLabel_1_2_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2.setBounds(10, 11, 150, 27);
 		tabInscrições.add(lblNewLabel_1_2_2);
 		
@@ -368,7 +367,7 @@ public class TelaPrincipal extends JFrame {
 		tabInscrições.add(txtCpfInscricao);
 		
 		JLabel lblNewLabel_1_2_2_1 = new JLabel("Código da disciplina:");
-		lblNewLabel_1_2_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1.setBounds(10, 49, 150, 27);
 		tabInscrições.add(lblNewLabel_1_2_2_1);
 		
@@ -378,7 +377,7 @@ public class TelaPrincipal extends JFrame {
 		tabInscrições.add(txtCodigoDisciplinaInscricao);
 		
 		JLabel lblNewLabel_1_2_2_1_1 = new JLabel("Código do processo:");
-		lblNewLabel_1_2_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1_1.setBounds(10, 87, 150, 27);
 		tabInscrições.add(lblNewLabel_1_2_2_1_1);
 		
@@ -396,7 +395,7 @@ public class TelaPrincipal extends JFrame {
 		tabInscrições.add(btnAtualizar_1_1_1);
 		
 		JButton btnConsultar_1_1_1 = new JButton("Consultar");
-		btnConsultar_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		//btnConsultar_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1_1_1.setBounds(397, 129, 96, 22);
 		tabInscrições.add(btnConsultar_1_1_1);
 		
@@ -433,7 +432,7 @@ public class TelaPrincipal extends JFrame {
 		tabConsultaInscrito.add(textArea_1_1_1_1);
 		
 		JLabel lblNewLabel_1_2_2_1_2 = new JLabel("Código da disciplina:");
-		lblNewLabel_1_2_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1_2.setBounds(69, 30, 150, 27);
 		tabConsultaInscrito.add(lblNewLabel_1_2_2_1_2);
 		
@@ -443,12 +442,12 @@ public class TelaPrincipal extends JFrame {
 		tabConsultaInscrito.add(txtCodigoDisciplinaConsulta);
 		
 		JButton btnConsultar_1_1_1_1 = new JButton("Consultar");
-		btnConsultar_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		//btnConsultar_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1_1_1_1.setBounds(400, 34, 96, 22);
 		tabConsultaInscrito.add(btnConsultar_1_1_1_1);
 		
 		JLabel lblNewLabel_1_2_2_1_2_1 = new JLabel("Professores inscritos nessa disciplina: ");
-		lblNewLabel_1_2_2_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1_2_1.setBounds(10, 107, 323, 27);
 		tabConsultaInscrito.add(lblNewLabel_1_2_2_1_2_1);
 		
@@ -462,12 +461,12 @@ public class TelaPrincipal extends JFrame {
 		tabDiscipAbertas.add(textArea_1_1_1_1_1);
 		
 		JLabel lblNewLabel_1_2_2_1_2_1_1 = new JLabel("Disciplinas com processos em aberto");
-		lblNewLabel_1_2_2_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		//lblNewLabel_1_2_2_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2_1_2_1_1.setBounds(10, 11, 362, 55);
 		tabDiscipAbertas.add(lblNewLabel_1_2_2_1_2_1_1);
 		
 		JButton btnConsultar_1_1_1_1_1 = new JButton("Consultar");
-		btnConsultar_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		//btnConsultar_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnConsultar_1_1_1_1_1.setBounds(136, 64, 119, 36);
 		tabDiscipAbertas.add(btnConsultar_1_1_1_1_1);		
 		

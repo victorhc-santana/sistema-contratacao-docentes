@@ -80,19 +80,5 @@ public class QuickSortLista {
 	    // 5. Inserimos o 'pI' (que estava em i) na posição 'j' que acabou de vagar
 	    lista.add(p1, j);
 	}
-	
-
-	//private void trocar(Lista<Professor> lista, int i, int j) throws Exception {
-		//if (i == j) {return;}
-		//Professor p1 = lista.get(i);
-		//Professor p2 = lista.get(j);
-
-		//lista.remove(j);
-		//lista.add(p1, i);
-
-		//lista.remove(i);
-		//lista.add(p2, j);
-
-	//}
-	
+		
 }
